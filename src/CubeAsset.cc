@@ -13,8 +13,10 @@ CubeAsset::CubeAsset() {
     ,  0.5, -0.5, -0.5
     ,  0.5,  0.5, -0.5
   };
+//these are the position of the points of the cube
+//they help to draw the lines
 
-  element_buffer_length = 36;
+  element_buffer_length = 36;//there are 36 vertices for the triangles to build the the cube
   GLuint element_buffer []  {
       0, 1, 2
     , 1, 2, 3
@@ -33,7 +35,8 @@ CubeAsset::CubeAsset() {
 
     , 2, 3, 6
     , 3, 6, 7
-  };
+  };// these are the coordinates for building the triangles
+//each face of the cube is made from 2 triangles
 
   // Transfer buffers to the GPU
   //
@@ -44,7 +47,7 @@ CubeAsset::CubeAsset() {
   // immediately bind the buffer and transfer the data
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_token);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, vertex_buffer, GL_STATIC_DRAW);
-
+//there are 24 traingles altogether to build the cube
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * element_buffer_length, element_buffer, GL_STATIC_DRAW);

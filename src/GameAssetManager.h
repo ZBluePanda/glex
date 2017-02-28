@@ -8,10 +8,14 @@
 #include <fstream>
 #include <iostream>
 
+#include <SDL2/SDL.h>
 #include <GL/gl.h>
 
 #include "common.h"
 #include "GameAsset.h"
+#include "Camera.h"
+
+
 
 /**
  * GameAssetManager is a container for GameAssets.  It also provides utility
@@ -36,6 +40,7 @@ class GameAssetManager {
 
   // The internal scene graph is a simple list.
   std::vector<std::shared_ptr<GameAsset>> draw_list;
+  //std::shared_ptr<Camera> camera;
   GLuint program_token;
 };
 

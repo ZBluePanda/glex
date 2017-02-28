@@ -4,10 +4,13 @@
 #include <memory>
 
 #include <GL/gl.h>
+#include <SDL2/SDL.h>
 
 #include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
+#include "Camera.h"
+
 
 /**
  * GameWorld allows us to separate the management of the game world from the

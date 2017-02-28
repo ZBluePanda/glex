@@ -9,6 +9,10 @@
 
 #define RUN_GRAPHICS_DISPLAY 0x00;
 
+#include "Camera.h"
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#include <glm/mat4x4.hpp>
 #include "common.h"
 #include "GameWorld.h"
 
@@ -159,10 +163,22 @@ int main(int argc, char ** argv) {
       break;
     case SDL_USEREVENT:
       Draw(window, game_world);
+    case SDL_KEYDOWN:
+	switch( event.key.keysym.sym ){
+		case SDLK_a: case SDLK_LEFT:
+			std::cout << "working" << std::endl;
+			//camera->moveX(-0.3);
+			break;
+		case SDLK_d: case SDLK_RIGHT:
+			//camera->moveX(0.3);
+			break;
 
-      break;
-    default:
-      break;
+				/*case SDLK_r: case SDLK_DELETE:
+					camera->reset_view();
+					break;*/
+		default:
+			break;
+	}
     }
   }
 }

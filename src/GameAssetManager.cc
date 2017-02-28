@@ -1,4 +1,5 @@
 #include "GameAssetManager.h"
+#include <exception>
 
 /**
  * Creates a GameAssetManager to load the correct shaders based on the
@@ -21,6 +22,8 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
   };
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
+
+  camera = std::make_shared<Camera>();
 }
 
 /**
@@ -66,8 +69,43 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  * Draws each GameAsset in the scene graph.
  */
 void GameAssetManager::Draw() {
-  for(auto ga: draw_list) {
-    ga->Draw(program_token);
+
+/*SDL_Event event;
+while( SDL_PollEvent(&event)){
+		
+	switch(event.type){
+	case SDL_KEYDOWN:
+			switch( event.key.keysym.sym ){
+
+				case SDLK_a: case SDLK_LEFT:
+					camera->moveX(-0.3);
+					break;
+
+				case SDLK_d: case SDLK_RIGHT:
+					camera->moveX(0.3);
+					break;
+
+				case SDLK_r: case SDLK_DELETE:
+					camera->reset_view();
+					break;
+
+				case SDLK_ESCAPE:
+					std::exit(0);
+
+	}
+		default:
+			break;	
+	}
+		
+}*/
+	glm::mat4 a = camera->getViewMatrix();
+
+	GLuint view_uniform = glGetUniformLocation(program_token, "view");
+	glUniformMatrix4fv(view_uniform, 1, false, glm::value_ptr(a));
+
+
+  	for(auto ga: draw_list) {
+    	ga->Draw(program_token);
   }
 }
 
